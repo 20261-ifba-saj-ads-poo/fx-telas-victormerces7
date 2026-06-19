@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 
@@ -8,10 +10,18 @@
    <bottom>
       <HBox alignment="CENTER" prefHeight="35.0" spacing="10.0" style="-fx-background-color: olive;" BorderPane.alignment="CENTER">
          <children>
-            <Button mnemonicParsing="false" onAction="#abrirCadastarFilme" prefHeight="26.0" prefWidth="125.0" text="Cadastrar Professor" />
+            <Button fx:id="CadastrarProfessor" blendMode="SOFT_LIGHT" mnemonicParsing="false" onAction="#abrirCadastaProfessor" prefHeight="26.0" prefWidth="125.0" text="Cadastrar Professor" />
             <Button mnemonicParsing="false" onAction="#abrirCadastarSessao" prefWidth="125.0" text="Cadastrar Pesquisa" />
             <Button mnemonicParsing="false" onAction="#abrirVenderIngresso" prefWidth="125.0" text="Cadastrar Aluno" />
          </children>
       </HBox>
    </bottom>
+   <center>
+      <TableView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+        <columns>
+          <TableColumn prefWidth="75.0" text="C1" />
+          <TableColumn prefWidth="75.0" text="C2" />
+        </columns>
+      </TableView>
+   </center>
 </BorderPane>
