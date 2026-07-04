@@ -10,17 +10,16 @@
    <bottom>
       <HBox alignment="CENTER" prefHeight="35.0" spacing="10.0" style="-fx-background-color: olive;" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="CadastrarProfessor" blendMode="SOFT_LIGHT" mnemonicParsing="false" onAction="#abrirCadastaProfessor" prefHeight="26.0" prefWidth="125.0" text="Cadastrar Professor" />
-            <Button mnemonicParsing="false" onAction="#abrirCadastarSessao" prefWidth="125.0" text="Cadastrar Pesquisa" />
-            <Button mnemonicParsing="false" onAction="#abrirVenderIngresso" prefWidth="125.0" text="Cadastrar Aluno" />
+            <Button fx:id="btnFilme" mnemonicParsing="false" onAction="#abrirCadastarFilme" prefHeight="26.0" prefWidth="125.0" text="Cadastrar Filme" />
+            <Button fx:id="btnSessao" mnemonicParsing="false" onAction="#abrirCadastarSessao" prefWidth="125.0" text="Cadastrar Sessão" />
+            <Button fx:id="btnIngresso" mnemonicParsing="false" onAction="#abrirVenderIngresso" prefWidth="125.0" text="Venda de Ingresso" />
          </children>
       </HBox>
    </bottom>
    <center>
       <TableView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
         <columns>
-          <TableColumn prefWidth="75.0" text="C1" />
-          <TableColumn prefWidth="75.0" text="C2" />
+          <TableColumn prefWidth="75.0" text="Menu" />
         </columns>
       </TableView>
    </center>

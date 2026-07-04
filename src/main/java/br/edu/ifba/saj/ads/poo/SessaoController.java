@@ -20,12 +20,12 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Spinner;
+import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
 import javafx.util.StringConverter;
 
 public class SessaoController {
-
 
     @FXML
     private DatePicker dtHorarioDia;
@@ -48,39 +48,34 @@ public class SessaoController {
     @FXML
     private void initialize() {
         slFilme.getItems().addAll(Cinema.filmes);
-        // quando um filme for selecionado na lista, vai guardar esse filme na variaval
-        // "filmeSelecionado"
         slFilme.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
                 filmeSelecionado = newValue;
             }
         });
-        // Define qual a informação do filme vai ser exibida na lista
+
         slFilme.setConverter(new StringConverter<Filme>() {
             @Override
             public String toString(Filme filme) {
-                // Define o texto que o usuário vai ver na tela
                 return filme == null ? "" : filme.getNome();
             }
 
             @Override
             public Filme fromString(String string) {
-                // Não é necessário implementar para ChoiceBox padrão (pode retornar null)
                 return null;
             }
         });
 
-        String regexFloat = "^[0-9]*\\.?[0-9]*$";
+        dtHorarioHora.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 23, 0));
+        dtHorarioMinuto.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 59, 0));
 
         txValor.setStyle("-fx-alignment: CENTER-RIGHT;");
 
         txValor.setTextFormatter(new TextFormatter<>(change -> {
-            // Se for uma ação de deletar ou resetar texto completo, permite
             if (change.isDeleted()) {
                 return change;
             }
 
-            // Pega o texto que resultaria da alteração e remove tudo que não for número
             String textoApenasNumeros = change.getControlNewText().replaceAll("[^0-9]", "");
 
             if (textoApenasNumeros.isEmpty()) {
@@ -90,15 +85,9 @@ public class SessaoController {
                 return change;
             }
 
-            // Converte para Long para remover zeros à esquerda desnecessários
             long valorLong = Long.parseLong(textoApenasNumeros);
-
-            // Transforma de volta em String formatando com duas casas decimais
-            // Exemplo: 125 vira "1.25"
             String novoTextoFormatado = String.format("%.2f", valorLong / 100.0);
 
-
-            // Define o texto final do componente
             int tamanhoTexto = novoTextoFormatado.length();
             change.setRange(0, change.getControlText().length());
             change.setText(novoTextoFormatado);
@@ -108,27 +97,22 @@ public class SessaoController {
             return change;
         }));
 
-        // Inicializa o campo com valor padrão zerado
         txValor.setText("0.00");
 
-        // Garante que o cursor sempre fique no final do texto ao clicar no campo
         txValor.focusedProperty().addListener((obs, antigo, novoFoco) -> {
             if (novoFoco) {
                 Platform.runLater(txValor::end);
             }
         });
 
-        // Expressão regular que aceita apenas dígitos (0-9) e permite que o campo fique
-        // vazio
         UnaryOperator<TextFormatter.Change> filtroInteiro = change -> {
             String novoTexto = change.getControlNewText();
             if (novoTexto.matches("\\d*")) {
-                return change; // Permite a alteração
+                return change;
             }
-            return null; // Rejeita a alteração se contiver letras ou caracteres inválidos
+            return null;
         };
 
-        // Aplica o filtro formatador no TextField
         txQuantidade.setTextFormatter(new TextFormatter<>(filtroInteiro));
     }
 
