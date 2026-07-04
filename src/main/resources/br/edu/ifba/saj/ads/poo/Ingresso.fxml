@@ -27,7 +27,7 @@
                            <children>
                               <Label text="Nome Completo:" />
                               <TextField fx:id="txNomeProfessor" prefHeight="25.0" prefWidth="544.0" />
-                              <Label text="Matrícula/Siape:" />
+                              <Label text="Matrícula" />
                               <TextField fx:id="txMatriculaProfessor" prefHeight="25.0" prefWidth="544.0" />
                               <Label text="Departamento:" />
                               <TextField fx:id="txDepartamento" prefHeight="25.0" prefWidth="544.0" promptText="Ex: Computação, Biologia" />
