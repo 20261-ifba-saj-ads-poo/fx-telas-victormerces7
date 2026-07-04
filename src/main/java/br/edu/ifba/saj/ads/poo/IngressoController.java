@@ -1,105 +1,74 @@
 package br.edu.ifba.saj.ads.poo;
 
-import java.io.IOException;
-import java.time.LocalDate;
-
-import br.edu.ifba.saj.ads.poo.data.Cinema;
-import br.edu.ifba.saj.ads.poo.model.Cliente;
-import br.edu.ifba.saj.ads.poo.model.Filme;
-import br.edu.ifba.saj.ads.poo.model.Ingresso;
-import br.edu.ifba.saj.ads.poo.model.Sessao;
-import br.edu.ifba.saj.ads.poo.model.TipoIngresso;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.ChoiceBox;
-import javafx.util.StringConverter;
+import javafx.scene.control.TextField;
 
 public class IngressoController {
 
     @FXML
-    private ChoiceBox<Filme> slFilme;
+    private TextField txNomeProfessor;
 
     @FXML
-    private ChoiceBox<Sessao> slHorarios;
+    private TextField txMatriculaProfessor;
 
     @FXML
-    private ChoiceBox<TipoIngresso> slTipoIngresso;
-
-    private Filme filmeSelecionado;
-    private Sessao sessaoSelecionada;
-    // private TipoIngresso tipoIngressoSelecionado;
+    private TextField txDepartamento;
 
     @FXML
-    private void initialize() {
-        slFilme.getItems().addAll(Cinema.filmes);
-        slTipoIngresso.getItems().addAll(TipoIngresso.values());
-
-        slFilme.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue != null) {
-                filmeSelecionado = newValue;
-                slHorarios.getItems().addAll(filmeSelecionado.getSessoes());
-            }
-        });
-
-        slFilme.setConverter(new StringConverter<Filme>() {
-            @Override
-            public String toString(Filme filme) {
-                return filme == null ? "" : filme.getNome();
-            }
-
-            @Override
-            public Filme fromString(String string) {
-                return null;
-            }
-        });
-
-        slHorarios.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue != null) {
-                sessaoSelecionada = newValue;
-            }
-        });
-
-        slHorarios.setConverter(new StringConverter<Sessao>() {
-            @Override
-            public String toString(Sessao sessao) {
-                return sessao == null ? ""
-                        : String.format("%1$td/%1$tm/%1$tY %1$tH:%1$tM ", sessao.getHorario());
-            }
-
-            @Override
-            public Sessao fromString(String string) {
-                return null;
-            }
-        });
-    }
+    private TextField txNomeAluno;
 
     @FXML
-    void salvar(ActionEvent event) {
-        Ingresso ingresso = sessaoSelecionada.venderIngresso(
-                new Cliente("Leandro", "01234567891", LocalDate.of(1983, 6, 4)),
-                slTipoIngresso.getSelectionModel().getSelectedItem());
-        if (ingresso != null) {
+    private TextField txMatriculaAluno;
 
-            new Alert(AlertType.INFORMATION, String.format(
-                    "Ingresso %s vendido para o filme %s na sessão de %3$td/%3$tm/%3$tY %3$tH:%3$tM. Ingressos disponíveis %4$d ",
-                    ingresso.getTipoIngresso(),
-                    ingresso.getSessao().getFilme().getNome(),
-                    ingresso.getSessao().getHorario(),
-                    ingresso.getSessao().quantidadeIngressosDisponiveis())).showAndWait();
-        } else {
-            new Alert(AlertType.ERROR, "Sessão lotada").showAndWait();
+    @FXML
+    private TextField txCursoSemestre;
+
+    @FXML
+    void cadastrarProfessor(ActionEvent event) {
+        if (txNomeProfessor.getText().isEmpty() || txMatriculaProfessor.getText().isEmpty() || txDepartamento.getText().isEmpty()) {
+            new Alert(AlertType.ERROR, "Preencha todos os campos do professor!").showAndWait();
+            return;
         }
-
+        
+        // TODO: Add professor to data storage
+        new Alert(AlertType.INFORMATION, "Professor cadastrado com sucesso!").showAndWait();
+        limparCamposProfessor();
     }
 
-    public Filme getFilmeSelecionado() {
-        return filmeSelecionado;
+    @FXML
+    void cadastrarAluno(ActionEvent event) {
+        if (txNomeAluno.getText().isEmpty() || txMatriculaAluno.getText().isEmpty() || txCursoSemestre.getText().isEmpty()) {
+            new Alert(AlertType.ERROR, "Preencha todos os campos do aluno!").showAndWait();
+            return;
+        }
+        
+        // TODO: Add student to data storage
+        new Alert(AlertType.INFORMATION, "Aluno cadastrado com sucesso!").showAndWait();
+        limparCamposAluno();
     }
 
-    public Sessao getSessaoSelecionada() {
-        return sessaoSelecionada;
+    @FXML
+    void voltarParaIndex(ActionEvent event) {
+        try {
+            FXMLLoader.load(getClass().getResource("Index.fxml"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
+    private void limparCamposProfessor() {
+        txNomeProfessor.clear();
+        txMatriculaProfessor.clear();
+        txDepartamento.clear();
+    }
+
+    private void limparCamposAluno() {
+        txNomeAluno.clear();
+        txMatriculaAluno.clear();
+        txCursoSemestre.clear();
+    }
 }
