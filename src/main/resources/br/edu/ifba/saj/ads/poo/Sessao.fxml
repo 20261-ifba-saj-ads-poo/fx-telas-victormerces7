@@ -1,15 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="340.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ifba.saj.ads.poo.SessaoController">
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ifba.saj.ads.poo.SessaoController">
    <children>
-      <Label alignment="CENTER" prefHeight="38.0" prefWidth="600.0" text="Cadastro de Sessões" textAlignment="CENTER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+      <AnchorPane layoutX="-1.0" layoutY="-1.0" prefHeight="60.0" prefWidth="707.0" style="-fx-background-color: #2196F3;" />
+      <Label alignment="CENTER" text="Cadastro de Projeto" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="10.0">
          <font>
-            <Font size="35.0" />
+            <Font size="28.0" />
          </font>
       </Label>
+      <VBox layoutX="14.0" layoutY="70.0" spacing="15.0" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="70.0">
+         <children>
+            <Label text="Título do Projeto:" />
+            <TextField fx:id="txTituloProjeto" prefHeight="25.0" prefWidth="672.0" />
+            
+            <Label text="Resumo/Descrição do Escopo do Projeto:" />
+            <TextArea fx:id="txDescricaoProjeto" prefHeight="100.0" prefWidth="672.0" wrapText="true" />
+            
+            <Label text="Professor Orientador:" />
+            <ComboBox fx:id="cbProfessor" prefHeight="25.0" prefWidth="672.0" promptText="Selecione um professor" />
+            
+            <Label text="Aluno Integrante:" />
+            <ComboBox fx:id="cbAluno" prefHeight="25.0" prefWidth="672.0" promptText="Selecione um aluno" />
+         </children>
+      </VBox>
+      <HBox alignment="CENTER_RIGHT" layoutX="14.0" layoutY="425.0" spacing="15.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0">
+         <children>
+            <Button fx:id="btnCancelar" mnemonicParsing="false" onAction="#cancelar" prefHeight="30.0" prefWidth="120.0" style="-fx-background-color: #757575; -fx-text-fill: white;" text="Cancelar" />
+            <Button fx:id="btnSalvar" mnemonicParsing="false" onAction="#salvar" prefHeight="30.0" prefWidth="180.0" style="-fx-background-color: #2196F3; -fx-text-fill: white;" text="Salvar e Publicar Projeto" />
+         </children>
+      </HBox>
    </children>
 </AnchorPane>

@@ -1,26 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ifba.saj.ads.poo.IndexController">
-   <bottom>
-      <HBox alignment="CENTER" prefHeight="35.0" spacing="10.0" style="-fx-background-color: olive;" BorderPane.alignment="CENTER">
+<BorderPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ifba.saj.ads.poo.IndexController">
+   <top>
+      <VBox spacing="10.0" style="-fx-background-color: #f4f4f4; -fx-padding: 15;" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="btnFilme" mnemonicParsing="false" onAction="#abrirCadastarFilme" prefHeight="26.0" prefWidth="125.0" text="Cadastrar Filme" />
-            <Button fx:id="btnSessao" mnemonicParsing="false" onAction="#abrirCadastarSessao" prefWidth="125.0" text="Cadastrar Sessão" />
-            <Button fx:id="btnIngresso" mnemonicParsing="false" onAction="#abrirVenderIngresso" prefWidth="125.0" text="Venda de Ingresso" />
+            <HBox alignment="CENTER" spacing="15.0">
+               <children>
+                  <Button fx:id="btnCadastrarIntegrantes" mnemonicParsing="false" onAction="#abrirCadastroIntegrantes" prefHeight="35.0" prefWidth="180.0" style="-fx-background-color: #4CAF50; -fx-text-fill: white;" text="Cadastrar Integrantes" />
+                  <Button fx:id="btnNovoProjeto" mnemonicParsing="false" onAction="#abrirCadastroProjeto" prefHeight="35.0" prefWidth="180.0" style="-fx-background-color: #2196F3; -fx-text-fill: white;" text="Novo Projeto" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" spacing="10.0">
+               <children>
+                  <Label text="Buscar:" />
+                  <TextField fx:id="txBusca" prefHeight="25.0" prefWidth="300.0" promptText="Pesquisar por título ou professor" />
+               </children>
+            </HBox>
          </children>
-      </HBox>
-   </bottom>
+      </VBox>
+   </top>
    <center>
-      <TableView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-        <columns>
-          <TableColumn prefWidth="75.0" text="Menu" />
-        </columns>
-      </TableView>
+      <VBox spacing="10.0" style="-fx-padding: 15;" BorderPane.alignment="CENTER">
+         <children>
+            <Label alignment="CENTER" contentDisplay="CENTER" text="Projetos Acadêmicos em Andamento">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+            <TableView fx:id="tbProjetos" prefHeight="350.0" prefWidth="750.0" VBox.vgrow="ALWAYS">
+              <columns>
+                <TableColumn fx:id="clmTitulo" prefWidth="200.0" text="Título do Projeto" />
+                <TableColumn fx:id="clmProfessor" prefWidth="180.0" text="Professor Orientador" />
+                <TableColumn fx:id="clmAluno" prefWidth="180.0" text="Aluno Integrante" />
+                <TableColumn fx:id="clmAreaStatus" prefWidth="150.0" text="Área/Status" />
+              </columns>
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
+            </TableView>
+         </children>
+      </VBox>
    </center>
 </BorderPane>
