@@ -54,7 +54,7 @@ public class IngressoController {
     @FXML
     void voltarParaIndex(ActionEvent event) {
         try {
-            FXMLLoader.load(getClass().getResource("Index.fxml"));
+            App.setRoot("Index");
         } catch (Exception e) {
             e.printStackTrace();
         }

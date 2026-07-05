@@ -48,7 +48,11 @@ public class SessaoController {
 
     @FXML
     void cancelar(ActionEvent event) {
-        limparCampos();
+        try {
+            App.setRoot("Index");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void limparCampos() {
